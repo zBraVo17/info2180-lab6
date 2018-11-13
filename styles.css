@@ -1,0 +1,68 @@
+h1{
+     font-family: verdana;
+     background-color: #8533ff;
+     color: #ffffff;
+     margin: auto;
+     width: auto;
+     font: 100% Garamond;
+     font-size: 2.25em
+ }
+ 
+ .container{
+      display: flex;
+      justify-content: space-between;
+      font-family: verdana;
+     background-color: #cac8ce;
+     color: #000000;
+     padding: 15px;
+     margin: auto;
+     width: auto;
+     height: auto;
+ }
+ 
+ .button{
+	background-color:#7892c2;
+	-moz-border-radius:10px;
+	-webkit-border-radius:10px;
+	border-radius:10px;
+	border:1px solid #4e6096;
+	font-weight:bold;
+	padding:12px 37px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #283966;
+ }
+ 
+ .button:hover{
+      background-color: #476e9e
+ }
+
+.button1{
+	background-color:#7892c2;
+	-moz-border-radius:10px;
+	-webkit-border-radius:10px;
+	border-radius:10px;
+	border:1px solid #4e6096;
+	font-weight:bold;
+	padding:12px 37px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #283966;
+ }
+ 
+ .button1:hover{
+      background-color: #476e9e
+ }
+ 
+ #search{
+     border-bottom: 1px solid #e9e8ed;
+ }
+ 
+ #result{
+     font-size: 1em;
+     color: black;
+ }
+ 
+div{
+  -webkit-box-sizing: border-box;
+ -moz-box-sizing: border-box;
+ -box-sizing: border-box;
+}

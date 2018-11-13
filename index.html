@@ -2,45 +2,93 @@
  <html>
   <head>
    <title>Dictionary</title>
-   <link href="index.css" type="text/css" rel="stylesheet">
+   <link href="styles.css" type="text/css" rel="stylesheet">
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   </head>
-
+  
   <body>
-    <div><h1>Web Dictionary</h1></div>
+    <div><h1><strong>Web Dictionary</strong></h1></div>
   	 <div class="container">
-     	<div id="search">
-      		<p>Lookup the definition of a word (eg. ajax, definition, bar, html, css, javascript or php) </p>
-      		<input id="button" type="button" value="Search">
-  	   		<input id="text" type="text" placeholder="Search for a word eg. ajax, definition, bar, html, css, javascript or php" required>
-  	  	</div>
-     <div id="result"><h2>Result</h2></div>
+     <div id="search">
+      <p> Lookup the definition of a word (eg.ajax, definition, bar, html, css, javascript or php) </p>
+      <input id="text" type="text" placeholder="Search for a word eg. ajax, definition, bar, html, css, javascript or php">
+      <input id="button" type="button" value="Search">
+      <input id="button1" type="button" value="Get All Definitions">
+      
+  	  </div>
+     <div id="result">
+     	<h2>Results</h2>
+     </div>
     </div>
   </body>
-
+  	 
   	 <script type="text/javascript">
         var search = document.getElementById('button');
         var text = document.getElementById('text');
         var result = document.getElementById('result');
-
+        
         window.onload = function() {
              search.addEventListener('click', function(){
-             var xhttp = new XMLHttpRequest();
-             xhttp.open('Get', 'request.php?q=definition');
-             xhttp.open('Get', 'request.php?q=' + text.value);
-             xhttp.onload = function(){
-      	        if (xhttp.status === 200){
-      		        text.innerHTML = xhttp.responseText;
-      		        result.innerHTML = xhttp.responseText;
+             var reqhttp = new XMLHttpRequest();
+             reqhttp.open('Get', 'request.php?q=definition');
+             reqhttp.open('Get', 'request.php?q=' + text.value);
+             reqhttp.onload = function(){
+      	        if (reqhttp.status === 200){
+      		        text.innerHTML = reqhttp.responseText;
+      		        result.innerHTML = reqhttp.responseText;
       		    }else{
-      			    alert('Failed.' + xhttp.status);
+      			    alert('Failed.' + reqhttp.status);
       			}
       	    };
-             xhttp.send();
+             reqhttp.send();
         });
-
-		};
+        
+       
+        var button1 = document.querySelector('#button1');
+        button1.addEventListener('click', function(){
+        var httpReq = new XMLHttpRequest();
+         
+        var url = "request.php?=&all=true";
+        httpReq.onreadystatechange = button1;
+        httpReq.open('GET', url);
+        httpReq.send();
+        
+        var button1 = function() {
+            if (httpReq.readyState === XMLHttpRequest.DONE) {
+              if (httpReq.status === 200) {
+                var response = httpReq.responseXML;
+                var results = document.querySelector('#result');
+                var entries = response.getElementsByTagName('definition');
+                var list = document.createElement('ol');
+                results.appendChild(list);
+                for (var i = 0; i < entries.length; i++) {
+                    var def = document.createElement('li');
+                    var name = document.createTextNode(entries[i].getAttribute("name"));
+                    var p = document.createElement("p");
+                    var p1 = document.createElement("p");
+                    var header = document.createElement("h3");
+                    var text = document.createTextNode(entries[i].childNodes[0].nodeValue);
+                    var writer = document.createTextNode(entries[i].getAttribute("author"));
+                  
+                    
+                    header.appendChild(name);
+                    p.appendChild(text);
+                    p1.appendChild(writer);
+                    def.appendChild(header);
+                    def.appendChild(p);
+                    def.appendChild(p);
+                    list.appendChild(def);
+                    
+                
+                }
+              } else {
+                alert('Failure');
+              }
+            }
+        }
+    });
+};
    </script>
   </body>
-
+  
 </html> 

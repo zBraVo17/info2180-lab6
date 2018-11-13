@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+ <html>
+  <head>
+   <title>Dictionary</title>
+   <link href="index.css" type="text/css" rel="stylesheet">
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  </head>
+
+  <body>
+    <div><h1>Web Dictionary</h1></div>
+  	 <div class="container">
+     	<div id="search">
+      		<p>Lookup the definition of a word (eg. ajax, definition, bar, html, css, javascript or php) </p>
+      		<input id="button" type="button" value="Search">
+  	   		<input id="text" type="text" placeholder="Search for a word eg. ajax, definition, bar, html, css, javascript or php" required>
+  	  	</div>
+     <div id="result"><h2>Result</h2></div>
+    </div>
+  </body>
+
+  	 <script type="text/javascript">
+        var search = document.getElementById('button');
+        var text = document.getElementById('text');
+        var result = document.getElementById('result');
+
+        window.onload = function() {
+             search.addEventListener('click', function(){
+             var xhttp = new XMLHttpRequest();
+             xhttp.open('Get', 'request.php?q=definition');
+             xhttp.open('Get', 'request.php?q=' + text.value);
+             xhttp.onload = function(){
+      	        if (xhttp.status === 200){
+      		        text.innerHTML = xhttp.responseText;
+      		        result.innerHTML = xhttp.responseText;
+      		    }else{
+      			    alert('Failed.' + xhttp.status);
+      			}
+      	    };
+             xhttp.send();
+        });
+
+		};
+   </script>
+  </body>
+
+</html> 
